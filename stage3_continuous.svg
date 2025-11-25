@@ -1,0 +1,55 @@
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg" style="background:#f9f9ff;border:1px solid #ddd;border-radius:8px;padding:20px;">
+  <style>
+    .space { fill: none; stroke: #ccc; stroke-dasharray: 2,4; }
+    .point { r: 7; }
+    .cluster { fill: none; stroke: #5e60ce; stroke-width: 2; stroke-dasharray: 5,5; }
+    .new-cluster { fill: none; stroke: #d32f2f; stroke-width: 2; stroke-dasharray: 3,3; }
+    .arrow { stroke: #388e3c; stroke-width: 2; marker-end: url(#arrowhead); }
+    .label { font: 13px sans-serif; fill: #333; text-anchor: middle; }
+    .caption { font: 12px sans-serif; fill: #666; text-anchor: middle; }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+            refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#388e3c"/>
+    </marker>
+  </defs>
+
+  <!-- Semantic Space (continuous) -->
+  <ellipse cx="300" cy="200" rx="220" ry="140" class="space"/>
+
+  <!-- Existing clusters -->
+  <circle cx="180" cy="160" r="40" class="cluster"/>
+  <circle cx="420" cy="180" r="45" class="cluster"/>
+  <circle cx="300" cy="260" r="35" class="cluster"/>
+
+  <!-- Data points in clusters -->
+  <circle cx="170" cy="150" class="point" fill="#42a5f5"/>
+  <circle cx="190" cy="170" class="point" fill="#42a5f5"/>
+  <circle cx="410" cy="170" class="point" fill="#66bb6a"/>
+  <circle cx="430" cy="190" class="point" fill="#66bb6a"/>
+  <circle cx="290" cy="250" class="point" fill="#ff7043"/>
+  <circle cx="310" cy="270" class="point" fill="#ff7043"/>
+
+  <!-- New data point outside existing clusters -->
+  <circle cx="100" cy="280" class="point" fill="#9c27b0"/>
+
+  <!-- New cluster forming around it -->
+  <circle cx="100" cy="280" r="30" class="new-cluster"/>
+
+  <!-- Arrow showing dynamic clustering -->
+  <line x1="100" y1="280" x2="100" y2="320" class="arrow"/>
+  <text x="100" y="340" class="label" fill="#d32f2f">新类别！</text>
+
+  <!-- Labels -->
+  <text x="180" y="120" class="label" fill="#42a5f5">动物</text>
+  <text x="420" y="140" class="label" fill="#66bb6a">植物</text>
+  <text x="300" y="310" class="label" fill="#ff7043">矿物</text>
+
+  <text x="300" y="350" class="caption">
+    连续自动分类：在语义空间中动态发现新类别
+  </text>
+  <text x="300" y="370" class="caption">
+    模型可自我扩展分类体系，无需人类预定义
+  </text>
+</svg>

@@ -1,0 +1,47 @@
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg" style="background:#f9f9ff;border:1px solid #ddd;border-radius:8px;padding:20px;">
+  <style>
+    .axis { stroke: #ccc; stroke-width: 1; }
+    .point { r: 6; }
+    .support { stroke: #d32f2f; stroke-width: 2; fill: none; }
+    .margin { stroke: #d32f2f; stroke-dasharray: 4,4; stroke-width: 1.5; }
+    .hyperplane { stroke: #5e60ce; stroke-width: 3; }
+    .label { font: 13px sans-serif; fill: #333; }
+  </style>
+
+  <!-- Coordinate system (conceptual) -->
+  <line x1="50" y1="320" x2="550" y2="320" class="axis"/>
+  <line x1="50" y1="320" x2="50" y2="60" class="axis"/>
+
+  <!-- Data points: Class A (blue circles) -->
+  <circle cx="120" cy="280" class="point" fill="#42a5f5"/>
+  <circle cx="160" cy="260" class="point" fill="#42a5f5"/>
+  <circle cx="140" cy="240" class="point" fill="#42a5f5"/>
+  <circle cx="180" cy="220" class="point" fill="#42a5f5"/>
+
+  <!-- Data points: Class B (red triangles) -->
+  <polygon points="380,180 386,192 374,192" fill="#ef5350"/>
+  <polygon points="420,160 426,172 414,172" fill="#ef5350"/>
+  <polygon points="400,140 406,152 394,152" fill="#ef5350"/>
+  <polygon points="440,120 446,132 434,132" fill="#ef5350"/>
+
+  <!-- Support vectors (highlighted) -->
+  <circle cx="180" cy="220" r="8" class="support"/>
+  <polygon points="380,180 386,192 374,192" stroke="#d32f2f" stroke-width="3" fill="none"/>
+
+  <!-- Margin lines -->
+  <line x1="200" y1="200" x2="460" y2="80" class="margin"/>
+  <line x1="160" y1="240" x2="420" y2="120" class="margin"/>
+
+  <!-- Optimal hyperplane -->
+  <line x1="180" y1="220" x2="440" y2="100" class="hyperplane"/>
+
+  <!-- Labels -->
+  <text x="100" y="300" class="label" fill="#42a5f5">类别 A</text>
+  <text x="460" y="100" class="label" fill="#ef5350">类别 B</text>
+  <text x="300" y="350" text-anchor="middle" class="label">
+    SVM：依赖人工设计的特征空间（如颜色、纹理）
+  </text>
+  <text x="300" y="370" text-anchor="middle" font-size="12" fill="#666">
+    分类边界由支持向量决定，但特征需人为提取
+  </text>
+</svg>

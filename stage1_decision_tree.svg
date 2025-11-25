@@ -1,0 +1,60 @@
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg" style="background:#f9f9ff;border:1px solid #ddd;border-radius:8px;padding:20px;">
+  <style>
+    .node { font: bold 14px sans-serif; fill: #333; }
+    .leaf { fill: #5e60ce; font-weight: bold; }
+    .arrow { stroke: #666; stroke-width: 1.5; marker-end: url(#arrowhead); }
+    .label { font: 12px sans-serif; fill: #666; }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+            refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Root -->
+  <rect x="250" y="30" width="100" height="40" rx="6" fill="#e8eaf6" stroke="#5e60ce"/>
+  <text x="300" y="55" text-anchor="middle" class="node">颜色 == 红？</text>
+
+  <!-- Left branch (Yes) -->
+  <line x1="300" y1="70" x2="180" y2="150" class="arrow"/>
+  <text x="220" y="110" class="label" text-anchor="start">是</text>
+
+  <rect x="130" y="150" width="100" height="40" rx="6" fill="#e8eaf6" stroke="#5e60ce"/>
+  <text x="180" y="175" text-anchor="middle" class="node">形状 == 圆？</text>
+
+  <!-- Left-Left (Yes-Yes) -->
+  <line x1="180" y1="190" x2="100" y2="270" class="arrow"/>
+  <text x="120" y="230" class="label" text-anchor="start">是</text>
+  <rect x="60" y="270" width="80" height="35" rx="5" fill="#d1c4e9"/>
+  <text x="100" y="293" text-anchor="middle" class="leaf">苹果</text>
+
+  <!-- Left-Right (Yes-No) -->
+  <line x1="180" y1="190" x2="260" y2="270" class="arrow"/>
+  <text x="240" y="230" class="label" text-anchor="end">否</text>
+  <rect x="220" y="270" width="80" height="35" rx="5" fill="#d1c4e9"/>
+  <text x="260" y="293" text-anchor="middle" class="leaf">草莓</text>
+
+  <!-- Right branch (No) -->
+  <line x1="300" y1="70" x2="420" y2="150" class="arrow"/>
+  <text x="380" y="110" class="label" text-anchor="end">否</text>
+
+  <rect x="370" y="150" width="100" height="40" rx="6" fill="#e8eaf6" stroke="#5e60ce"/>
+  <text x="420" y="175" text-anchor="middle" class="node">硬度 &gt; 5？</text>
+
+  <!-- Right-Left (No-Yes) -->
+  <line x1="420" y1="190" x2="340" y2="270" class="arrow"/>
+  <text x="360" y="230" class="label" text-anchor="start">是</text>
+  <rect x="300" y="270" width="80" height="35" rx="5" fill="#d1c4e9"/>
+  <text x="340" y="293" text-anchor="middle" class="leaf">石头</text>
+
+  <!-- Right-Right (No-No) -->
+  <line x1="420" y1="190" x2="500" y2="270" class="arrow"/>
+  <text x="480" y="230" class="label" text-anchor="end">否</text>
+  <rect x="460" y="270" width="80" height="35" rx="5" fill="#d1c4e9"/>
+  <text x="500" y="293" text-anchor="middle" class="leaf">棉花</text>
+
+  <text x="300" y="350" text-anchor="middle" font-size="13" fill="#666">
+    决策树：人类专家定义特征与分裂规则
+  </text>
+</svg>
