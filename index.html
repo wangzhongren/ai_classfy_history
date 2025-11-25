@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>AI分类进化史 · 极客版</title>
   <style>
     :root {
@@ -16,17 +16,31 @@
       --limitation: #ffd166;
       --border: #333;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: 'Fira Code', 'Consolas', monospace;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.6;
       font-size: 16px;
+      overflow-x: hidden;
     }
-    a { color: var(--primary); text-decoration: none; }
-    a:hover { text-decoration: underline; }
 
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ========== 桌面侧边栏 ========== */
     .sidebar {
       position: fixed;
       top: 0;
@@ -37,7 +51,9 @@
       border-right: 1px solid var(--border);
       padding: 30px 0;
       overflow-y: auto;
+      z-index: 1000;
     }
+
     .sidebar h1 {
       font-size: 1.4rem;
       font-weight: 600;
@@ -46,13 +62,16 @@
       color: var(--accent);
       letter-spacing: 1px;
     }
+
     .sidebar ul {
       list-style: none;
       padding: 0 20px;
     }
+
     .sidebar li {
       margin: 16px 0;
     }
+
     .sidebar a {
       display: block;
       padding: 10px 15px;
@@ -60,65 +79,70 @@
       color: #aaa;
       border-radius: 6px;
     }
+
     .sidebar a:hover,
     .sidebar a.active {
       color: var(--accent);
       background: rgba(79, 195, 247, 0.1);
     }
 
+    /* ========== 主内容区 ========== */
     main {
       margin-left: 260px;
-      padding: 50px 60px 80px;
-      /* 移除 max-width 和 margin: auto，使内容居左 */
+      padding: 50px 40px 80px;
+      max-width: 960px;
     }
+
     .container {
-      /* 移除 max-width 和 margin: auto */
+      margin: 0 auto;
+      max-width: 900px;
     }
 
     section {
-      margin-bottom: 80px;
-      padding: 40px;
+      margin-bottom: 70px;
+      padding: 35px;
       background: var(--card-bg);
       border-radius: 12px;
       border: 1px solid var(--border);
     }
+
     h2 {
-      font-size: 2.0rem;
+      font-size: 2rem;
       color: var(--accent);
       margin: 0 0 25px;
       font-weight: 600;
     }
-    h3 {
+
+    h3, .era-title {
       font-size: 1.45rem;
       margin: 28px 0 18px;
       color: var(--primary);
     }
-    p { margin: 16px 0; }
-    ul, ol { padding-left: 28px; margin: 16px 0; }
-    li { margin: 10px 0; }
 
     .era-title {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin: 35px 0 20px;
-      color: var(--accent);
       border-left: 3px solid var(--primary);
       padding-left: 12px;
     }
 
-    .problem { 
+    p { margin: 16px 0; }
+    ul, ol { padding-left: 28px; margin: 16px 0; }
+    li { margin: 10px 0; }
+
+    .problem {
       background: rgba(255, 107, 107, 0.1);
       border-left: 4px solid var(--problem);
       padding: 20px;
       margin: 25px 0;
     }
-    .solution { 
+
+    .solution {
       background: rgba(107, 255, 107, 0.1);
       border-left: 4px solid var(--solution);
       padding: 20px;
       margin: 25px 0;
     }
-    .limitation { 
+
+    .limitation {
       background: rgba(255, 209, 102, 0.1);
       border-left: 4px solid var(--limitation);
       padding: 20px;
@@ -135,6 +159,7 @@
       font-size: 0.95rem;
       line-height: 1.6;
     }
+
     .example-title {
       color: var(--accent);
       margin-bottom: 12px;
@@ -144,10 +169,11 @@
     .autoregressive-step {
       background: #1a232a;
       padding: 12px;
-      margin: 10px 0;
+      margin: 12px 0;
       border-left: 3px solid var(--primary);
       font-size: 0.95rem;
     }
+
     .step-input { color: #ff7043; }
     .step-output { color: #6bff6b; }
 
@@ -157,12 +183,14 @@
       margin: 20px 0;
       font-size: 0.95rem;
     }
+
     .tech-table th,
     .tech-table td {
       border: 1px solid var(--border);
       padding: 12px;
       text-align: left;
     }
+
     .tech-table th {
       background: rgba(79, 195, 247, 0.1);
     }
@@ -171,13 +199,16 @@
       text-align: center;
       margin: 35px 0;
     }
-    .svg-container svg {
+
+    .svg-container img {
       max-width: 100%;
       height: auto;
       background: #252525;
       padding: 20px;
       border-radius: 10px;
       border: 1px solid #444;
+      display: block;
+      margin: 0 auto;
     }
 
     footer {
@@ -193,12 +224,120 @@
       padding: 2px 6px;
       border-radius: 4px;
       font-family: 'Fira Code', monospace;
+      font-size: 0.95em;
+    }
+
+    /* ========== 移动端导航 ========== */
+    .mobile-nav-toggle {
+      display: none;
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      width: 44px;
+      height: 44px;
+      background: var(--primary);
+      color: var(--bg);
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1.4rem;
+      text-align: center;
+      line-height: 44px;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1050;
+    }
+
+    /* ========== 移动端断点 ========== */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 85%;
+        max-width: 300px;
+        height: 100vh;
+        transition: left 0.3s cubic-bezier(0.33, 0.66, 0.66, 1);
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+        z-index: 1100;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      .sidebar-backdrop.active {
+        display: block;
+      }
+
+      .mobile-nav-toggle {
+        display: block;
+      }
+
+      main {
+        margin-left: 0;
+        padding: 70px 18px 60px;
+      }
+
+      .container {
+        max-width: none;
+      }
+
+      section {
+        padding: 24px 18px;
+        margin-bottom: 60px;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      h3, .era-title {
+        font-size: 1.35rem;
+      }
+
+      p, li {
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .example-box, .problem, .solution, .limitation {
+        font-size: 14px;
+        padding: 18px 16px;
+      }
+
+      pre {
+        font-size: 13px;
+        overflow-x: auto;
+      }
+
+      .tech-table {
+        font-size: 13px;
+      }
+
+      .tech-table th,
+      .tech-table td {
+        padding: 10px 8px;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="sidebar">
+<!-- 移动端遮罩层 -->
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<!-- 侧边栏 -->
+<div class="sidebar" id="sidebar">
   <h1>AI分类进化史</h1>
   <ul>
     <li><a href="#intro" class="active">引言：分类即智能</a></li>
@@ -209,250 +348,190 @@
   </ul>
 </div>
 
+<!-- 汉堡按钮 -->
+<div class="mobile-nav-toggle" id="mobileNavToggle">☰</div>
+
 <main>
-<!-- 移除 .container 的包裹，使内容直接居左 -->
-<div id="intro" class="section-wrapper">
-  <section>
-    <h2>引言：分类即智能</h2>
-    <p>从图灵测试到GPT-4，AI的核心任务始终是<strong>分类</strong>。本文以极客视角，用初中生也能懂的例子，讲清70年演进逻辑。</p>
-    
-    <div class="example-box">
-      <div class="example-title">👦 初中生例子：认动物</div>
-      <p>你看到一个动物：</p>
-      <ul>
-        <li>有四条腿、毛茸茸、汪汪叫 → 你分类为“狗”；</li>
-        <li>有翅膀、会飞、打鸣 → 你分类为“公鸡”。</li>
-      </ul>
-      <p>AI也在做同样的事，只是方式不断进化。</p>
-    </div>
-  </section>
-</div>
-
-<div id="era1" class="section-wrapper">
-  <section>
-    <h2>[1950s–2010] 规则匹配分类</h2>
-    <p>最早的AI像一个死板的程序员，所有知识都靠人类一条条写进去。</p>
-
-    <div class="era-title">1.1 问题</div>
-    <div class="problem">
-      <p>如何在没有数据的情况下让AI做决策？</p>
+  <div class="container">
+    <div id="intro" class="section-wrapper">
+      <section>
+        <h2>引言：分类即智能</h2>
+        <p>从图灵测试到GPT-4，AI的核心任务始终是<strong>分类</strong>。本文以极客视角，用初中生也能懂的例子，讲清70年演进逻辑。</p>
+        <div class="example-box">
+          <div class="example-title">👦 初中生例子：认动物</div>
+          <p>你看到一个动物：</p>
+          <ul>
+            <li>有四条腿、毛茸茸、汪汪叫 → 你分类为“狗”；</li>
+            <li>有翅膀、会飞、打鸣 → 你分类为“公鸡”。</li>
+          </ul>
+          <p>AI也在做同样的事，只是方式不断进化。</p>
+        </div>
+      </section>
     </div>
 
-    <div class="era-title">1.2 解决思路</div>
-    <div class="solution">
-      <p>人类专家写规则，AI严格匹配。</p>
-    </div>
+    <div id="era1" class="section-wrapper">
+      <section>
+        <h2>[1950s–2010] 规则匹配分类</h2>
+        <p>最早的AI像一个死板的程序员，所有知识都靠人类一条条写进去。</p>
 
-    <div class="example-box">
-      <div class="example-title">👦 初中生例子：垃圾邮件过滤器</div>
-      <p>程序员告诉AI：</p>
-      <pre style="background:#1e1e1e; padding:12px; border-radius:6px; margin-top:10px;">
-if (email.contains("免费") && email.contains("中奖")) {
+        <div class="era-title">1.1 问题</div>
+        <div class="problem"><p>如何在没有数据的情况下让AI做决策？</p></div>
+
+        <div class="era-title">1.2 解决思路</div>
+        <div class="solution"><p>人类专家写规则，AI严格匹配。</p></div>
+
+        <div class="example-box">
+          <div class="example-title">👦 初中生例子：垃圾邮件过滤器</div>
+          <p>程序员告诉AI：</p>
+          <pre>if (email.contains("免费") && email.contains("中奖")) {
     label = "垃圾邮件";
 } else {
     label = "正常邮件";
 }</pre>
-      <p>但坏人只要把“免费”改成“免·费”，规则就失效了。</p>
+          <p>但坏人只要把“免费”改成“免·费”，规则就失效了。</p>
+        </div>
+
+        <div class="era-title">1.3 技术对照</div>
+        <table class="tech-table">
+          <tr><th>通俗解释</th><th>专业术语</th></tr>
+          <tr><td>人写死规则，机器照做</td><td>专家系统 / 符号主义 AI</td></tr>
+          <tr><td>根据特征一步步判断</td><td>决策树 (ID3, C4.5)</td></tr>
+          <tr><td>手工设计特征 + 数学分类</td><td>SVM + 人工特征工程</td></tr>
+        </table>
+
+        <div class="svg-container">
+          <img src="stage1_decision_tree.svg" alt="决策树示意图" />
+        </div>
+
+        <div class="era-title">1.4 局限性</div>
+        <div class="limitation"><p>规则太死板！世界太复杂，人类无法穷尽所有情况。→ 需要让AI自己从数据中学习。</p></div>
+      </section>
     </div>
 
-    <div class="era-title">1.3 技术对照</div>
-    <table class="tech-table">
-      <tr>
-        <th>通俗解释</th>
-        <th>专业术语</th>
-      </tr>
-      <tr>
-        <td>人写死规则，机器照做</td>
-        <td>专家系统 / 符号主义 AI</td>
-      </tr>
-      <tr>
-        <td>根据特征一步步判断</td>
-        <td>决策树 (ID3, C4.5)</td>
-      </tr>
-      <tr>
-        <td>手工设计特征 + 数学分类</td>
-        <td>SVM + 人工特征工程</td>
-      </tr>
-    </table>
+    <div id="era2" class="section-wrapper">
+      <section>
+        <h2>[2012–2022] 监督学习分类</h2>
+        <p>2012年，AlexNet用深度学习引爆AI革命。</p>
 
-    <div class="svg-container">
-      <object data="stage1_decision_tree.svg" type="image/svg+xml" width="600" height="400"></object>
+        <div class="era-title">2.1 问题</div>
+        <div class="problem"><p>手工特征无法处理图像、语音等高维数据。</p></div>
+
+        <div class="era-title">2.2 解决思路</div>
+        <div class="solution"><p>给AI看百万张带标签的图片，让它自己总结规律。</p></div>
+
+        <div class="example-box">
+          <div class="example-title">👦 初中生例子：AI认猫狗</div>
+          <p>科学家给AI看100万张照片，每张都标好名字：</p>
+          <ul><li>这张是“猫”</li><li>这张是“狗”</li></ul>
+          <p>AI通过多层“滤镜”分析：</p>
+          <ol>
+            <li>第一层：找边缘、颜色块；</li>
+            <li>第二层：组合成眼睛、耳朵；</li>
+            <li>最后一层：判断“整体像猫还是狗”。</li>
+          </ol>
+          <p>训练完后，它就能认新照片了！</p>
+        </div>
+
+        <div class="era-title">2.3 技术对照</div>
+        <table class="tech-table">
+          <tr><th>通俗解释</th><th>专业术语</th></tr>
+          <tr><td>AI看百万张带标签图片，自己总结规律</td><td>CNN (AlexNet, ResNet)</td></tr>
+          <tr><td>AI读大量标注文本，学会判断情感</td><td>RNN/LSTM + 注意力</td></tr>
+          <tr><td>先在大数据上学通用知识，再在小数据上微调</td><td>预训练+微调</td></tr>
+        </table>
+
+        <div class="svg-container">
+          <img src="stage2_cnn.svg" alt="CNN 卷积神经网络" />
+        </div>
+
+        <div class="era-title">2.4 局限性</div>
+        <div class="limitation"><p>AI只能从人类教过的类别里选答案。如果你问“这是什么动物？”，但它只学过“猫”和“狗”，就算看到狐狸也会硬说成“狗”。→ 需要让AI自己定义类别。</p></div>
+      </section>
     </div>
 
-    <div class="era-title">1.4 局限性</div>
-    <div class="limitation">
-      <p>规则太死板！世界太复杂，人类无法穷尽所有情况。→ 需要让AI自己从数据中学习。</p>
-    </div>
-  </section>
-</div>
+    <div id="era3" class="section-wrapper">
+      <section>
+        <h2>[2023–未来] 自回归语义分类</h2>
+        <p>大模型的核心机制是<strong>自回归（Autoregressive）</strong>：每一步生成的词，都会作为下一步的输入，形成闭环。</p>
 
-<div id="era2" class="section-wrapper">
-  <section>
-    <h2>[2012–2022] 监督学习分类</h2>
-    <p>2012年，AlexNet用深度学习引爆AI革命。</p>
+        <div class="era-title">3.1 问题</div>
+        <div class="problem"><p>真实世界是开放的，人类无法预先定义所有类别。</p></div>
 
-    <div class="era-title">2.1 问题</div>
-    <div class="problem">
-      <p>手工特征无法处理图像、语音等高维数据。</p>
-    </div>
+        <div class="era-title">3.2 解决思路</div>
+        <div class="solution"><p>通过自回归生成，在连续语义空间中动态构建分类体系。每一步都是对“下一个词”的分类，输出立即成为新输入。</p></div>
 
-    <div class="era-title">2.2 解决思路</div>
-    <div class="solution">
-      <p>给AI看百万张带标签的图片，让它自己总结规律。</p>
-    </div>
+        <div class="example-box">
+          <div class="example-title">👦 初中生例子：AI如何一步步生成分类结果</div>
+          <p>你问AI：“分析以下评论，归纳主要情绪类型。”</p>
+          <p>AI不是一次性想好答案，而是<strong>一个字一个字生成</strong>：</p>
 
-    <div class="example-box">
-      <div class="example-title">👦 初中生例子：AI认猫狗</div>
-      <p>科学家给AI看100万张照片，每张都标好名字：</p>
-      <ul>
-        <li>这张是“猫”</li>
-        <li>这张是“狗”</li>
-      </ul>
-      <p>AI通过多层“滤镜”分析：</p>
-      <ol>
-        <li>第一层：找边缘、颜色块；</li>
-        <li>第二层：组合成眼睛、耳朵；</li>
-        <li>最后一层：判断“整体像猫还是狗”。</li>
-      </ol>
-      <p>训练完后，它就能认新照片了！</p>
-    </div>
+          <div class="autoregressive-step">
+            <span class="step-input">输入: "分析以下评论，归纳主要情绪类型。"</span><br>
+            <span class="step-output">输出: "1. "</span>
+          </div>
+          <div class="autoregressive-step">
+            <span class="step-input">输入: "分析以下评论... 1. "</span><br>
+            <span class="step-output">输出: "愤怒"</span>
+          </div>
+          <div class="autoregressive-step">
+            <span class="step-input">输入: "分析以下评论... 1. 愤怒"</span><br>
+            <span class="step-output">输出: "（"</span>
+          </div>
+          <div class="autoregressive-step">
+            <span class="step-input">输入: "分析以下评论... 1. 愤怒（"</span><br>
+            <span class="step-output">输出: "占比"</span>
+          </div>
+          <div class="autoregressive-step">
+            <span class="step-input">输入: "分析以下评论... 1. 愤怒（占比"</span><br>
+            <span class="step-output">输出: "30%"</span>
+          </div>
+          <div class="autoregressive-step">
+            <span class="step-input">输入: "分析以下评论... 1. 愤怒（占比30%"</span><br>
+            <span class="step-output">输出: "）"</span>
+          </div>
+          <div class="autoregressive-step">
+            <span class="step-input">输入: "分析以下评论... 1. 愤怒（占比30%）"</span><br>
+            <span class="step-output">输出: "\n2. "</span>
+          </div>
 
-    <div class="era-title">2.3 技术对照</div>
-    <table class="tech-table">
-      <tr>
-        <th>通俗解释</th>
-        <th>专业术语</th>
-      </tr>
-      <tr>
-        <td>AI看百万张带标签图片，自己总结规律</td>
-        <td>CNN (AlexNet, ResNet)</td>
-      </tr>
-      <tr>
-        <td>AI读大量标注文本，学会判断情感</td>
-        <td>RNN/LSTM + 注意力</td>
-      </tr>
-      <tr>
-        <td>先在大数据上学通用知识，再在小数据上微调</td>
-        <td>预训练+微调</td>
-      </tr>
-    </table>
+          <p>每一步，AI都在做一次<strong>分类任务</strong>：从几万个词中选出最可能的下一个词。<br>
+            <code>输入 → 分类 → 输出 → 新输入 → 再分类 → ...</code>
+          </p>
+          <p>这就是<strong>自回归</strong>——输出自动回归为输入，持续生成。</p>
+        </div>
 
-    <div class="svg-container">
-      <object data="stage2_cnn.svg" type="image/svg+xml" width="600" height="400"></object>
-    </div>
+        <div class="era-title">3.3 技术对照</div>
+        <table class="tech-table">
+          <tr><th>通俗解释</th><th>专业术语</th></tr>
+          <tr><td>每生成一个词，都作为下一步的输入</td><td>自回归生成 (Autoregressive Generation)</td></tr>
+          <tr><td>在脑子里建一张“语义地图”</td><td>连续语义向量空间</td></tr>
+          <tr><td>看一句话时，能同时关注所有词</td><td>自注意力机制 (Self-Attention)</td></tr>
+          <tr><td>图像和文字映射到同一空间</td><td>对比学习 (CLIP)</td></tr>
+        </table>
 
-    <div class="era-title">2.4 局限性</div>
-    <div class="limitation">
-      <p>AI只能从人类教过的类别里选答案。如果你问“这是什么动物？”，但它只学过“猫”和“狗”，就算看到狐狸也会硬说成“狗”。→ 需要让AI自己定义类别。</p>
-    </div>
-  </section>
-</div>
+        <div class="svg-container">
+          <img src="stage2_transformer.svg" alt="Transformer 架构" />
+        </div>
 
-<div id="era3" class="section-wrapper">
-  <section>
-    <h2>[2023–未来] 自回归语义分类</h2>
-    <p>大模型的核心机制是<strong>自回归（Autoregressive）</strong>：每一步生成的词，都会作为下一步的输入，形成闭环。</p>
-
-    <div class="era-title">3.1 问题</div>
-    <div class="problem">
-      <p>真实世界是开放的，人类无法预先定义所有类别。</p>
+        <div class="era-title">3.4 当前挑战</div>
+        <div class="limitation"><p>自回归生成可能因早期错误导致后续偏差（错误累积），且无法并行生成。但其优势在于：能动态构建开放世界的分类体系，无需人类预设。</p></div>
+      </section>
     </div>
 
-    <div class="era-title">3.2 解决思路</div>
-    <div class="solution">
-      <p>通过自回归生成，在连续语义空间中动态构建分类体系。每一步都是对“下一个词”的分类，输出立即成为新输入。</p>
+    <div id="summary" class="section-wrapper">
+      <section>
+        <h2>总结：统一理论</h2>
+        <p>AI分类的70年演进：</p>
+        <ul>
+          <li><code>[1950s]</code> 人写规则 → AI死记硬背；</li>
+          <li><code>[2012]</code> 人给数据 → AI学会认已知；</li>
+          <li><code>[2023]</code> 人给任务 → AI通过<strong>自回归闭环</strong>自己思考怎么分。</li>
+        </ul>
+        <p>而大模型的真正突破在于：<strong>将分类任务转化为自回归生成过程，在生成中构建对世界的理解</strong>。</p>
+        <p>这，就是智能的起点。</p>
+      </section>
     </div>
-
-    <div class="example-box">
-      <div class="example-title">👦 初中生例子：AI如何一步步生成分类结果</div>
-      <p>你问AI：“分析以下评论，归纳主要情绪类型。”</p>
-      <p>AI不是一次性想好答案，而是<strong>一个字一个字生成</strong>，每步都依赖之前的内容：</p>
-      
-      <div class="autoregressive-step">
-        <span class="step-input">输入: "分析以下评论，归纳主要情绪类型。"</span><br>
-        <span class="step-output">输出: "1. "</span>
-      </div>
-      <div class="autoregressive-step">
-        <span class="step-input">输入: "分析以下评论... 1. "</span><br>
-        <span class="step-output">输出: "愤怒"</span>
-      </div>
-      <div class="autoregressive-step">
-        <span class="step-input">输入: "分析以下评论... 1. 愤怒"</span><br>
-        <span class="step-output">输出: "（"</span>
-      </div>
-      <div class="autoregressive-step">
-        <span class="step-input">输入: "分析以下评论... 1. 愤怒（"</span><br>
-        <span class="step-output">输出: "占比"</span>
-      </div>
-      <div class="autoregressive-step">
-        <span class="step-input">输入: "分析以下评论... 1. 愤怒（占比"</span><br>
-        <span class="step-output">输出: "30%"</span>
-      </div>
-      <div class="autoregressive-step">
-        <span class="step-input">输入: "分析以下评论... 1. 愤怒（占比30%"</span><br>
-        <span class="step-output">输出: "）"</span>
-      </div>
-      <div class="autoregressive-step">
-        <span class="step-input">输入: "分析以下评论... 1. 愤怒（占比30%）"</span><br>
-        <span class="step-output">输出: "\n2. "</span>
-      </div>
-      <!-- 继续... -->
-
-      <p>每一步，AI都在做一次<strong>分类任务</strong>：从几万个词中选出最可能的下一个词。整个过程形成闭环：<br>
-        <code>输入 → 分类 → 输出 → 新输入 → 再分类 → ...</code>
-      </p>
-      <p>这就是<strong>自回归</strong>——输出自动回归为输入，持续生成。</p>
-    </div>
-
-    <div class="era-title">3.3 技术对照</div>
-    <table class="tech-table">
-      <tr>
-        <th>通俗解释</th>
-        <th>专业术语</th>
-      </tr>
-      <tr>
-        <td>每生成一个词，都作为下一步的输入</td>
-        <td>自回归生成 (Autoregressive Generation)</td>
-      </tr>
-      <tr>
-        <td>在脑子里建一张“语义地图”</td>
-        <td>连续语义向量空间</td>
-      </tr>
-      <tr>
-        <td>看一句话时，能同时关注所有词</td>
-        <td>自注意力机制 (Self-Attention)</td>
-      </tr>
-      <tr>
-        <td>图像和文字映射到同一空间</td>
-        <td>对比学习 (CLIP)</td>
-      </tr>
-    </table>
-
-    <div class="svg-container">
-      <object data="stage2_transformer.svg" type="image/svg+xml" width="600" height="400"></object>
-    </div>
-
-    <div class="era-title">3.4 当前挑战</div>
-    <div class="limitation">
-      <p>自回归生成可能因早期错误导致后续偏差（错误累积），且无法并行生成。但其优势在于：能动态构建开放世界的分类体系，无需人类预设。</p>
-    </div>
-  </section>
-</div>
-
-<div id="summary" class="section-wrapper">
-  <section>
-    <h2>总结：统一理论</h2>
-    <p>AI分类的70年演进：</p>
-    <ul>
-      <li><code>[1950s]</code> 人写规则 → AI死记硬背；</li>
-      <li><code>[2012]</code> 人给数据 → AI学会认已知；</li>
-      <li><code>[2023]</code> 人给任务 → AI通过<strong>自回归闭环</strong>自己思考怎么分。</li>
-    </ul>
-    <p>而大模型的真正突破在于：<strong>将分类任务转化为自回归生成过程，在生成中构建对世界的理解</strong>。</p>
-    <p>这，就是智能的起点。</p>
-  </section>
-</div>
-
+  </div>
 </main>
 
 <footer>
@@ -460,36 +539,68 @@ if (email.contains("免费") && email.contains("中奖")) {
 </footer>
 
 <script>
-// 修复滚动高亮逻辑：使用 getBoundingClientRect().top + window.scrollY 精确判断
-window.addEventListener('scroll', () => {
-  const sections = ['intro', 'era1', 'era2', 'era3', 'summary'];
-  const navLinks = document.querySelectorAll('.sidebar a');
-  
-  // 计算每个 section 的可视区域中点
-  let current = 'intro';
-  for (const id of sections) {
-    const el = document.getElementById(id);
-    const rect = el.getBoundingClientRect();
-    const elemTop = rect.top + window.scrollY;
-    const elemBottom = elemTop + el.offsetHeight;
-    
-    // 当前视口中心
-    const scrollTop = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const scrollCenter = scrollTop + windowHeight / 2;
-    
-    if (scrollCenter >= elemTop && scrollCenter <= elemBottom) {
-      current = id;
+  // ========== 滚动高亮（修复移动端） ==========
+  function updateActiveNav() {
+    const sections = ['intro', 'era1', 'era2', 'era3', 'summary'];
+    const navLinks = document.querySelectorAll('.sidebar a');
+
+    let current = 'intro';
+    const scrollPos = window.scrollY + window.innerHeight / 3; // 更灵敏的触发点
+
+    for (const id of sections) {
+      const el = document.getElementById(id);
+      const top = el.offsetTop;
+      const bottom = top + el.offsetHeight;
+
+      if (scrollPos >= top && scrollPos < bottom) {
+        current = id;
+        break;
+      }
     }
+
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
   }
-  
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href') === '#' + current) {
-      link.classList.add('active');
-    }
-  });
-});
+
+  window.addEventListener('scroll', updateActiveNav);
+  window.addEventListener('load', updateActiveNav);
+
+  // ========== 移动端菜单 ==========
+  const mobileToggle = document.getElementById('mobileNavToggle');
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+
+  function openSidebar() {
+    sidebar.classList.add('active');
+    backdrop.classList.add('active');
+    document.body.style.overflow = 'hidden'; // 防止背景滚动
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('active');
+    backdrop.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (mobileToggle) {
+    mobileToggle.addEventListener('click', openSidebar);
+    backdrop.addEventListener('click', closeSidebar);
+
+    // 点击侧边栏内链接也关闭
+    sidebar.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeSidebar);
+    });
+  }
+
+  // ========== 防止 iOS 地址栏遮挡 ==========
+  if ('scrollTo' in window) {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        window.scrollTo(0, 1);
+      }, 500);
+    });
+  }
 </script>
 </body>
 </html>
