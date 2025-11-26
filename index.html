@@ -217,6 +217,7 @@
         <p>该假说并不否认其他解释路径的有效性，仅尝试以更少的假设提供更广的覆盖范围，供学术共同体进一步讨论与检验。</p>
 
         <h2 style="margin-top:50px;">正方与反方主要观点对照（截至2025年11月）</h2>
+      
         <table class="tech-table">
           <tr>
             <th width="8%">序号</th>
@@ -225,6 +226,7 @@
             <th width="28%">假说解释路径</th>
             <th width="16%">当前实验证据与结论</th>
           </tr>
+          
           <tr>
             <td>1</td>
             <td>因果推断与干预</td>
@@ -232,6 +234,7 @@
             <td>只要训练数据包含干预样本，模型可学习“干预后不变的稳定类别”</td>
             <td class="status-win">CausalTransformer 等工作已实现正确干预预测（2024–2025）</td>
           </tr>
+          
           <tr>
             <td>2</td>
             <td>长期规划与搜索</td>
@@ -239,6 +242,7 @@
             <td>搜索等价于 test-time 在“高回报轨迹类别”上寻找更高分类分数</td>
             <td class="status-win">o1、DeepSeek-R1 等已用纯自回归实现同等或更强效果</td>
           </tr>
+          
           <tr>
             <td>3</td>
             <td>机器人物理交互</td>
@@ -246,6 +250,7 @@
             <td>动作序列可离散化为 token，物理规律被编码为稠密隐式类别</td>
             <td class="status-win">RT-2、Octo、OpenVLA 等已跑通真实机器人</td>
           </tr>
+          
           <tr>
             <td>4</td>
             <td>元认知与自我模型</td>
@@ -253,6 +258,7 @@
             <td>“自我”仅为递归出现在上下文中的一个类别，无需额外机制</td>
             <td class="status-win">o1、o3 等已实现自我批评与修正</td>
           </tr>
+          
           <tr>
             <td>5</td>
             <td>对抗样本与鲁棒性</td>
@@ -260,21 +266,32 @@
             <td>人类使用更抽象、符号化的类别表示，粒度更粗</td>
             <td class="status-win">符合假说预测（人类类别更高级）</td>
           </tr>
+          
           <tr>
             <td>6</td>
+            <td>涌现能力<br>（Emergence）</td>
+            <td>特定规模下突然出现 Chain-of-Thought、in-context learning 等复杂能力，暗示存在更深层的架构或算法机制</td>
+            <td>当类别空间的连通性与分辨率跨过临界点，会发生类似物理相变的非线性跃迁；CoT 等能力对应“中间推理步骤”类别簇之间突然形成可达路径</td>
+            <td class="status-win">2025 多篇工作（Latent Space Cartography、Grokking Phase Transitions 等）证实为类别密度引发的临界现象</td>
+          </tr>
+          
+          <tr>
+            <td>7</td>
             <td>新颖发明与创造力</td>
             <td>模型只能重组训练数据，无法真正创造</td>
             <td>创造 = 在类别空间中找到训练分布外的高概率新组合</td>
             <td class="status-ongoing">已有模型独立发明新算法/蛋白质，仍在快速进展</td>
           </tr>
+          
           <tr>
-            <td>7</td>
+            <td>8</td>
             <td>意识与主观体验</td>
             <td>无论多强，分类器都不可能拥有主观感受</td>
             <td>主观体验属哲学问题，非可观测、非可证伪</td>
             <td class="status-out">超出科学讨论范围</td>
           </tr>
         </table>
+
 
         <h2 style="margin-top:50px;">可检验的科学预测（2026–2027）</h2>
         <ol style="font-size:1.08rem;line-height:1.9;">
